@@ -16,10 +16,21 @@ function ContextProvider({ children }) {
   ];
   const difficulty = ["easy", "medium", "hard"];
   const [filledForm, setFilledForm] = useState({
-    amountOfQuestions: 10,
+    amount: 10,
     category: categories[0],
-    difficultyLevel: difficulty[0],
+    difficulty: difficulty[0],
   });
+
+  function handleFormChange(e) {
+    e.preventDefault();
+    const target = e.target;
+    const name = target.name;
+    const value = target.value;
+    setFilledForm({
+      ...filledForm,
+      [name]: value,
+    });
+  }
 
   return (
     <MyContext.Provider
@@ -27,7 +38,7 @@ function ContextProvider({ children }) {
         categories,
         difficulty,
         filledForm,
-        setFilledForm,
+        handleFormChange,
       }}
     >
       {children}

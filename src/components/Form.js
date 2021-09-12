@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 function Form() {
   const history = useHistory();
-  const { categories, difficulty, filledForm, setFilledForm } =
+  const { categories, difficulty, filledForm, handleFormChange } =
     useGlobalContext();
 
   function handleSubmit(e) {
@@ -18,29 +18,23 @@ function Form() {
         <h2>Quiz</h2>
         {/* number of questions */}
         <div>
-          <label htmlFor="questionsNumber">Number Of Questions</label>
+          <label htmlFor="questionsAmount">Number Of Questions</label>
           <input
             type="number"
-            name="Number of questions:"
-            id="questionsNumber"
-            value={filledForm.amountOfQuestions}
-            onChange={(e) =>
-              setFilledForm({
-                ...filledForm,
-                amountOfQuestions: Number(e.target.value),
-              })
-            }
+            name="amount"
+            id="questionsAmount"
+            value={filledForm.amount}
+            onChange={(e) => handleFormChange(e)}
           />
         </div>
         {/* category */}
         <div>
           <label htmlFor="category">Category</label>
           <select
-            name="category name: "
+            name="category"
             id="category"
-            onChange={(e) =>
-              setFilledForm({ ...filledForm, category: e.target.value })
-            }
+            value={filledForm.category}
+            onChange={(e) => handleFormChange(e)}
           >
             {categories.map((category, index) => {
               // const { id, name } = category;
@@ -56,12 +50,10 @@ function Form() {
         <div>
           <label htmlFor="difficultyLevel">Difficulty</label>
           <select
-            name="difficulty level: "
+            name="difficulty"
             id="difficultyLevel"
-            value={filledForm.difficultyLevel}
-            onChange={(e) =>
-              setFilledForm({ ...filledForm, difficultyLevel: e.target.value })
-            }
+            value={filledForm.difficulty}
+            onChange={(e) => handleFormChange(e)}
           >
             {difficulty.map((difficultyLevel, index) => {
               return (

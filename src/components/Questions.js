@@ -18,7 +18,7 @@ function Questions() {
     const sessionToken = await getSessionToken();
     const categoryID = await getCategoryID(filledForm.category);
     const response = await fetch(
-      `${url}?amount=${filledForm.amountOfQuestions}&category=${categoryID}&difficulty=${filledForm.difficultyLevel}&token=${sessionToken}`
+      `${url}?amount=${filledForm.amount}&category=${categoryID}&difficulty=${filledForm.difficulty}&token=${sessionToken}`
     );
     const { results: questionsArray } = await response.json();
     setQuestions(questionsArray);
