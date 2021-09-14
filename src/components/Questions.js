@@ -15,13 +15,27 @@ function Questions() {
   const [showModal, setShowModal] = useState(false);
 
   async function fetchData() {
+    const { amount, category, difficulty } = filledForm;
     const sessionToken = await getSessionToken();
-    const categoryID = await getCategoryID(filledForm.category);
+    let categoryURL, difficultyURL;
+
+    if (category !== "Any Category") {
+      const categoryID = await getCategoryID(category);
+      categoryURL = `&category=${categoryID}`;
+    }
+
+    if (difficulty !== "Any Difficulty") {
+      difficultyURL = `&difficulty=${difficulty}`;
+    }
+
     const response = await fetch(
-      `${url}?amount=${filledForm.amount}&category=${categoryID}&difficulty=${filledForm.difficulty}&token=${sessionToken}`
+      `${url}?amount=${amount}${categoryURL || ""}${
+        difficultyURL || ""
+      }&token=${sessionToken}`
     );
-    const { results: questionsArray } = await response.json();
-    setQuestions(questionsArray);
+
+    const { results } = await response.json();
+    setQuestions(results);
   }
 
   useEffect(() => {

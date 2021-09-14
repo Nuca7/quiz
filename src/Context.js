@@ -1,25 +1,26 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { getCategories } from "./helperFunctions";
 
 const MyContext = React.createContext();
 
 function ContextProvider({ children }) {
-  const categories = [
-    "General Knowledge",
-    "Science: Computers",
-    "Entertainment: Comics",
-    "Entertainment: Japanese Anime & Manga",
-    "Entertainment: Cartoon & Animations",
-    "Entertainment: Television",
-    "Art",
-    "Animals",
-    "Celebrities",
-  ];
-  const difficulty = ["easy", "medium", "hard"];
+  const [categories, setCategories] = useState(["Any Category"]);
+  const difficulty = ["Any Difficulty", "easy", "medium", "hard"];
   const [filledForm, setFilledForm] = useState({
     amount: 10,
     category: categories[0],
     difficulty: difficulty[0],
   });
+
+  async function setData() {
+    const categoriesObj = await getCategories();
+    const CategoriesNames = categoriesObj.map((category) => category.name);
+    setCategories([...categories, ...CategoriesNames]);
+  }
+
+  useEffect(() => {
+    setData();
+  }, []);
 
   function handleFormChange(e) {
     e.preventDefault();
