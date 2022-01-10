@@ -1,17 +1,18 @@
 import React from "react";
 import { useGlobalContext } from "../Context";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./Form.css";
 
 function Form() {
-  const history = useHistory();
+  let navigate = useNavigate();
+
   const { categories, difficulty, filledForm, handleFormChange } =
     useGlobalContext();
 
   function handleSubmit(e) {
     e.preventDefault();
-    history.push("/quiz/questions");
+    navigate("/quiz/questions");
   }
 
   return (

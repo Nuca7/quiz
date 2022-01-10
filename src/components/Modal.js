@@ -1,13 +1,13 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./Modal.css";
 
 function Modal({ questionsNumber, correctAnswers }) {
-  let history = useHistory();
+  let navigate = useNavigate();
 
   function playAgain() {
-    history.push("/quiz");
+    navigate("/quiz");
   }
 
   return (

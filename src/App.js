@@ -1,20 +1,16 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Form from "./components/Form";
 import Questions from "./components/Questions";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/quiz">
-          <Form />
-        </Route>
-        <Route exact path="/quiz/questions">
-          <Questions />
-        </Route>
-      </Switch>
-    </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/quiz" element={<Form />} />
+        <Route path="/quiz/questions" element={<Questions />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
