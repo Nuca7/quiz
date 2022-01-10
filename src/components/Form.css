@@ -1,0 +1,28 @@
+.quiz-form {
+  background: #2a9d8f;
+  color: #f4f1de;
+  width: 500px;
+  margin: 30px auto;
+  padding: 2rem;
+}
+.quiz-form div {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0;
+}
+.quiz-form input {
+  padding: 0.3rem;
+}
+.quiz-form select {
+  padding: 0.3rem;
+}
+.submitBtn {
+  display: block;
+  text-align: center;
+  padding: 0.3rem 3rem;
+  padding: 0.5rem 4rem;
+  margin: 0 auto;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

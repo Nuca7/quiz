@@ -5,6 +5,8 @@ import { getSessionToken } from "../api";
 import { getCategoryID } from "../api";
 import { useGlobalContext } from "../Context";
 
+import "./Questions.css";
+
 const url = "https://opentdb.com/api.php";
 
 function Questions() {

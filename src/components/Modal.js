@@ -1,6 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
+import "./Modal.css";
+
 function Modal({ questionsNumber, correctAnswers }) {
   let history = useHistory();
 

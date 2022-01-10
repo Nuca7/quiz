@@ -2,6 +2,8 @@ import React from "react";
 import { useGlobalContext } from "../Context";
 import { useHistory } from "react-router-dom";
 
+import "./Form.css";
+
 function Form() {
   const history = useHistory();
   const { categories, difficulty, filledForm, handleFormChange } =

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { decode } from "html-entities";
 import { shuffle } from "../helperFunctions";
 
+import "./Question.css";
+
 function Question({
   question,
   correct_answer,
