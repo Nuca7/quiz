@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Question from "./Question";
 import Modal from "./Modal";
-import { getSessionToken } from "../helperFunctions";
-import { getCategoryID } from "../helperFunctions";
+import { getSessionToken } from "../api";
+import { getCategoryID } from "../api";
 import { useGlobalContext } from "../Context";
 
 const url = "https://opentdb.com/api.php";
