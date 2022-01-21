@@ -11,11 +11,17 @@ function Question({
   checkAnswer,
 }) {
   const [answers, setAnswers] = useState([]);
+  const [active, setActive] = useState(-1);
 
   useEffect(() => {
     if (!question) return;
     setAnswers(shuffle([correct_answer, ...incorrect_answers]));
   }, [question]);
+
+  function handleSubmit() {
+    checkAnswer(answers[active], correct_answer);
+    setActive(-1);
+  }
 
   if (!question) {
     return <h2>loading...</h2>;
@@ -26,15 +32,22 @@ function Question({
       <h2 className="question">{decode(question)}</h2>
       {answers.map((answer, index) => {
         return (
-          <button
-            className="answers"
+          <p
+            className={`answers ${index === active && "active"}`}
             key={index}
-            onClick={() => checkAnswer(answer, correct_answer)}
+            onClick={() => setActive(index)}
           >
             {decode(answer)}
-          </button>
+          </p>
         );
       })}
+      <button
+        className="next-button"
+        disabled={active === -1}
+        onClick={handleSubmit}
+      >
+        Next Question
+      </button>
     </article>
   );
 }
