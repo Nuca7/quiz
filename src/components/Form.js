@@ -40,7 +40,6 @@ function Form() {
             onChange={(e) => handleFormChange(e)}
           >
             {categories.map((category, index) => {
-              // const { id, name } = category;
               return (
                 <option key={index} value={category}>
                   {category}
