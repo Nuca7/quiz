@@ -20,3 +20,16 @@ export async function getCategoryID(category) {
   )[0];
   return id;
 }
+
+export async function getQuestions(
+  amount,
+  category = "",
+  difficulty = "",
+  sessionToken
+) {
+  if (!sessionToken) return;
+  const queryParameter = `amount=${amount}${category}${difficulty}&token=${sessionToken}`;
+  const response = await fetch(`${baseUrl}/api.php?${queryParameter}`);
+  const data = await response.json();
+  return data;
+}

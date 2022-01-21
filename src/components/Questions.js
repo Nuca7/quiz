@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Question from "./Question";
 import Modal from "./Modal";
-import { getSessionToken } from "../api";
-import { getCategoryID } from "../api";
+import { getSessionToken, getCategoryID, getQuestions } from "../api";
 import { useGlobalContext } from "../Context";
 
 import "./Questions.css";
-
-const url = "https://opentdb.com/api.php";
 
 function Questions() {
   const { filledForm } = useGlobalContext();
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [playerPoints, setPlayerPoints] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
   async function fetchData() {
@@ -30,13 +27,12 @@ function Questions() {
       difficultyURL = `&difficulty=${difficulty}`;
     }
 
-    const response = await fetch(
-      `${url}?amount=${amount}${categoryURL || ""}${
-        difficultyURL || ""
-      }&token=${sessionToken}`
+    const { results } = await getQuestions(
+      amount,
+      categoryURL,
+      difficultyURL,
+      sessionToken
     );
-
-    const { results } = await response.json();
     setQuestions(results);
   }
 
@@ -46,7 +42,7 @@ function Questions() {
 
   function checkAnswer(answer, correct_answer) {
     if (correct_answer === answer) {
-      setCorrectAnswers(correctAnswers + 1);
+      setPlayerPoints(playerPoints + 1);
     }
     increaseIndex(currentIndex);
   }
@@ -61,13 +57,10 @@ function Questions() {
 
   return (
     <div className="questionsContainer">
-      <p>{`${correctAnswers} / ${questions.length}`}</p>
+      <p>{`${playerPoints} / ${questions.length}`}</p>
       <Question checkAnswer={checkAnswer} {...questions[currentIndex]} />
       {showModal && (
-        <Modal
-          questionsNumber={questions.length}
-          correctAnswers={correctAnswers}
-        />
+        <Modal questionsNumber={questions.length} playerPoints={playerPoints} />
       )}
     </div>
   );

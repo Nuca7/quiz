@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./Modal.css";
 
-function Modal({ questionsNumber, correctAnswers }) {
+function Modal({ questionsNumber, playerPoints }) {
   let navigate = useNavigate();
 
   function playAgain() {
@@ -15,7 +15,7 @@ function Modal({ questionsNumber, correctAnswers }) {
       <div className="modal">
         <h2>Finished</h2>
         <p>
-          You answered {correctAnswers} out of {questionsNumber}
+          You answered {playerPoints} out of {questionsNumber}
         </p>
         <button onClick={playAgain}>Play Again</button>
       </div>
